@@ -204,7 +204,7 @@ export default function Home() {
   const consultar = async (values: any) => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/robo", {
+      const response = await fetch("api/robo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
