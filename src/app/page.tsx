@@ -14,6 +14,7 @@ import {
   Modal,
 } from "antd";
 import ptBR from "antd/lib/locale/pt_BR";
+import axios from "axios";
 
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -26,6 +27,36 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [modalData, setModalData] = useState<any>(null);
+
+  const teste = () => {
+    const token =
+      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InJhaXNhLmNhZGV0ZUBqdXNjYXNoLmNvbS5iciIsImF1dG9yaXplZCI6ImFnZW5jaWFzMyJ9";
+    const request = {
+      /*   nome: "cledosn [test3]",
+      cpf: "231.564.957-89",
+      email: "cladasdas@cnn.com",
+      whatsapp: "(41) 99797-5555",
+      oab: "asdasdasd/pr",
+      cumprimento_sentenca_definitivo: "Sim",
+      origem: "organic",
+      num_processos: ["asdasdaasdasd"], */
+    };
+
+    axios
+      .post("http://rpa.juscash.com.br/jc/api/lead", request, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        message.success("Lead cadastrado com sucesso!");
+      })
+      .catch((error) => {
+        console.log(error);
+        message.error("Ocorreu um erro ao cadastrar o lead, tente novamente.");
+      });
+  };
 
   const tipos = [
     { name: "Trabalhista", value: "trabalhista" },
@@ -240,6 +271,7 @@ export default function Home() {
               <h1 className=" font-bold text-2xl  text-default">
                 Calculadora de previsão de processo
               </h1>
+              <button onClick={() => teste()}>teste de botão</button>
             </div>
             <div className="mt-2 mb-5">
               <h2 className=" font-bold text-lg text-black">
